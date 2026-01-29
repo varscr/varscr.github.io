@@ -4,10 +4,13 @@ A minimal, production-ready portfolio built with Next.js, TypeScript, and Tailwi
 
 ## Features
 
+- **Dark theme** with modern, minimal design
 - **Single-page design** with smooth scrolling between sections
-- **Static export** ready for GitHub Pages deployment
-- **Subtle animations** powered by Framer Motion
+- **Dynamic animations** powered by Framer Motion (parallax, stagger, hover effects)
+- **Glassmorphism effects** on interactive elements
+- **Gradient dividers** between sections
 - **Responsive design** optimized for all devices
+- **Static export** ready for GitHub Pages deployment
 - **SEO optimized** with proper metadata and Open Graph tags
 
 ## Tech Stack
@@ -46,34 +49,36 @@ This creates an `out` directory with the static files ready for deployment.
 
 ## Deployment to GitHub Pages
 
-1. Build the project:
-   ```bash
-   npm run build
-   ```
+### First-time setup
 
-2. The static files will be in the `out` directory
+1. Go to your repository settings → Pages
+2. Set source to `gh-pages` branch (root folder)
+3. Save
 
-3. Deploy the `out` directory contents to your GitHub Pages:
+### Deploy updates
 
-   **Option A: Manual deployment**
-   ```bash
-   # From the out directory
-   git init
-   git add .
-   git commit -m "Deploy portfolio"
-   git branch -M gh-pages
-   git remote add origin https://github.com/VarScr/varscr.github.io.git
-   git push -f origin gh-pages
-   ```
+Simply run:
 
-   **Option B: Using npm package**
-   ```bash
-   npx gh-pages -d out -b gh-pages
-   ```
+```bash
+npm run deploy
+```
 
-4. Go to your repository settings → Pages → Set source to `gh-pages` branch
+This command will:
+- Build the production bundle (`npm run build`)
+- Deploy the `out/` folder to the `gh-pages` branch (including the `.nojekyll` file)
 
-5. Your site will be live at `https://varscr.github.io`
+After 2-3 minutes, your site will be live at `https://varscr.github.io`
+
+### Manual deployment (alternative)
+
+If you prefer to deploy manually:
+
+```bash
+npm run build
+npx gh-pages -d out -b gh-pages --dotfiles
+```
+
+**Important:** The `--dotfiles` flag ensures the `.nojekyll` file is deployed. This file tells GitHub Pages not to use Jekyll, which would otherwise ignore the `_next/` folder containing all JavaScript and CSS files.
 
 ## Project Structure
 
@@ -95,7 +100,9 @@ This creates an `out` directory with the static files ready for deployment.
 │       └── Card.tsx
 ├── lib/
 │   └── data.ts             # Centralized content data
-└── public/                 # Static assets
+└── public/
+    ├── .nojekyll           # Tells GitHub Pages to skip Jekyll processing
+    └── ...                 # Other static assets
 ```
 
 ## Updating Content
@@ -108,7 +115,11 @@ All portfolio content is centralized in `lib/data.ts`. Edit this file to update:
 - Featured projects
 - Contact information
 
-After updating, rebuild the project and redeploy.
+After updating, redeploy with:
+
+```bash
+npm run deploy
+```
 
 ## License
 
