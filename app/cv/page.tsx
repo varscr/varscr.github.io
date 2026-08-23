@@ -17,8 +17,8 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 export default function Cv() {
   return (
-    <main className="cv mx-auto max-w-3xl px-6 py-14">
-      <header className="mb-8">
+    <main className="cv mx-auto max-w-3xl px-6 py-10">
+      <header className="mb-7">
         <h1 className="text-2xl font-semibold tracking-tight">{profile.name}</h1>
         <p className="mt-1 text-sm text-ink/70">{profile.role}</p>
         <p className="mt-3 text-sm text-ink/70">
@@ -35,7 +35,7 @@ export default function Cv() {
         <p className="measure mt-4 text-[0.9rem] leading-snug">{profile.lead}</p>
       </header>
 
-      <section className="mb-7">
+      <section className="mb-6">
         <Heading>Experience</Heading>
         <Timeline variant="cv" />
         <div className="mt-4 grid gap-1 text-[0.85rem] text-ink/60 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
@@ -44,7 +44,7 @@ export default function Cv() {
         </div>
       </section>
 
-      <section className="mb-7">
+      <section className="mb-6">
         <Heading>Education</Heading>
         <div className="space-y-2">
           {education.map((entry) => (
@@ -52,8 +52,9 @@ export default function Cv() {
               key={`${entry.institution}-${entry.programme}`}
               className="grid break-inside-avoid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6"
             >
-              <div className="tabular text-[0.85rem] text-ink/55">
-                {entry.start} – {entry.end}
+              <div className="tabular text-[0.85rem] leading-snug text-ink/55">
+                <span className="block">{entry.start}</span>
+                <span className="block">{entry.end}</span>
               </div>
               <div>
                 <p className="text-[0.9rem]">{entry.programme}</p>
@@ -77,7 +78,7 @@ export default function Cv() {
             </div>
           ))}
           <div className="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-            <dt className="text-[0.85rem] text-ink/55">Languages</dt>
+            <dt className="text-[0.85rem] text-ink/55">Spoken</dt>
             <dd className="text-[0.9rem]">{languages}</dd>
           </div>
         </dl>

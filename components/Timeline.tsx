@@ -3,7 +3,7 @@ import { roles } from '@/lib/data'
 
 export default function Timeline({ variant }: { variant: 'web' | 'cv' }) {
   return (
-    <div className={variant === 'cv' ? 'space-y-5' : 'space-y-10'}>
+    <div className={variant === 'cv' ? 'space-y-4' : 'space-y-10'}>
       {roles.map((role) => (
         <div
           key={`${role.org}-${role.start}`}

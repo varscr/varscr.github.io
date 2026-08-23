@@ -79,12 +79,6 @@ a:hover {
     text-decoration: none;
   }
 
-  /* A printed copy has no hover and no click — the URL has to be on the paper.
-     Scoped to external links so mailto: and internal hrefs stay clean. */
-  a[href^="http"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.85em;
-    color: rgba(0, 0, 0, 0.55);
-    word-break: break-all;
-  }
+  /* No ::after URL injection: every link on the CV already shows its URL as its
+     own link text, so appending href duplicated it and broke the header line. */
 }

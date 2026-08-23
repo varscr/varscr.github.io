@@ -54,7 +54,7 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-6 grid gap-1 text-sm text-ink/55 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-          <span>Languages</span>
+          <span>Spoken</span>
           <span>{languages}</span>
         </div>
       </section>
