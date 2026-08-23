@@ -11,31 +11,33 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 export default function Home() {
   return (
     <main className="mx-auto max-w-2xl px-6 py-20 sm:py-28">
-      <header>
-        <picture>
+      <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+        <picture className="shrink-0">
           <source srcSet={profile.photo.webp} type="image/webp" />
           <img
             src={profile.photo.jpg}
             alt={profile.photo.alt}
-            width={112}
-            height={112}
-            className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
+            width={128}
+            height={128}
+            className="h-24 w-24 rounded-full object-cover sm:h-32 sm:w-32"
           />
         </picture>
 
-        <h1 className="mt-8 text-4xl font-semibold tracking-tight sm:text-5xl">{profile.name}</h1>
-        <div aria-hidden className="mt-4 h-[2px] w-16 bg-mint" />
-        <p className="mt-5 text-base text-ink/70">{profile.role}</p>
-        <p className="mt-1 text-sm text-ink/50">{profile.keywords}</p>
+        <div>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{profile.name}</h1>
+          <div aria-hidden className="mt-4 h-[2px] w-16 bg-mint" />
+          <p className="mt-5 text-base text-ink/70">{profile.role}</p>
+          <p className="mt-1 text-sm text-ink/50">{profile.keywords}</p>
+        </div>
       </header>
 
-      <section className="mt-16">
+      <section className="reveal mt-16">
         <SectionHeading>About</SectionHeading>
         <p className="text-lg leading-relaxed">{profile.lead}</p>
         <p className="mt-4 text-ink/70">{profile.now}</p>
       </section>
 
-      <section className="mt-16">
+      <section className="reveal mt-16">
         <SectionHeading>Experience</SectionHeading>
         <div className="space-y-7">
           {roles.map((role) => (
@@ -53,7 +55,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-16">
+      <section className="reveal mt-16">
         <SectionHeading>Projects</SectionHeading>
         <div className="space-y-8">
           {projects.map((project) => (
@@ -66,7 +68,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-16">
+      <section className="reveal mt-16">
         <SectionHeading>Contact</SectionHeading>
         <ul className="space-y-2">
           <li>
@@ -81,6 +83,7 @@ export default function Home() {
           ))}
         </ul>
       </section>
+      <div aria-hidden className="scroll-glow" />
     </main>
   )
 }

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* app/cv is gitignored so the CV stays local, and Tailwind v4 skips gitignored
+   files during automatic source detection — which silently dropped every utility
+   used only on the CV page. An explicit @source is scanned regardless. */
+@source "../app/cv";
+
 :root {
   --ink: #111111;
   --paper: #faf9f7;
@@ -76,6 +81,60 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: rgba(17, 17, 17, 0.55);
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────────────────
+   Scroll-driven CSS animations: no JavaScript, no library, nothing to hydrate.
+   Everything lives inside @supports so that a browser without scroll timelines
+   renders the page fully visible rather than blank — the hidden state must never
+   be the fallback. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(1.25rem);
+      animation: reveal linear both;
+      animation-timeline: view();
+      /* Ranged on entry, not cover: a cover-based range cannot complete for the
+         last section, because the page runs out of scroll before it gets there
+         and it would sit permanently half-faded. */
+      animation-range: entry 0% entry 55%;
+    }
+
+    .scroll-glow {
+      position: fixed;
+      inset: auto 0 0 0;
+      height: 45vh;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(
+        to top,
+        color-mix(in srgb, var(--mint) 34%, transparent),
+        color-mix(in srgb, var(--mint) 14%, transparent) 35%,
+        color-mix(in srgb, var(--mint) 4%, transparent) 65%,
+        transparent
+      );
+      opacity: 0;
+      animation: glow linear both;
+      animation-timeline: scroll(root);
+      /* Absent until you have scrolled — it is a reward for going down the page,
+         not part of the first impression. */
+      animation-range: 25% 100%;
+    }
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes glow {
+  to {
+    opacity: 1;
+  }
 }
 
 /* ── CV sheets ─────────────────────────────────────────────────────────
