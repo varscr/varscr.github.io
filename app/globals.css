@@ -45,3 +45,46 @@ a {
 a:hover {
   text-decoration-color: var(--ink);
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm;
+  }
+
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --rule: rgba(0, 0, 0, 0.25);
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 10.5pt;
+  }
+
+  .cv {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* No entry may straddle a page boundary. */
+  .role,
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  /* A printed copy has no hover and no click — the URL has to be on the paper.
+     Scoped to external links so mailto: and internal hrefs stay clean. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: rgba(0, 0, 0, 0.55);
+    word-break: break-all;
+  }
+}
