@@ -47,6 +47,21 @@ a:hover {
   text-decoration-color: var(--ink);
 }
 
+.cv-aside {
+  position: relative;
+}
+
+/* Stretched explicitly: an absolutely positioned <img> with top/bottom set but
+   height:auto keeps its intrinsic ratio instead of filling, so the height has to
+   be stated. object-fit:fill stops the 1:1 viewBox forcing a square. */
+.cv-tint {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
 .cv-name {
   font-size: 2.15rem;
   font-weight: 300;
@@ -63,27 +78,86 @@ a:hover {
   color: rgba(17, 17, 17, 0.55);
 }
 
-/* ── CV two-column shell ───────────────────────────────────────────────
-   The sidebar's grey is painted by a gradient on the grid, not by the aside's
-   own background: a background on the column would stop at the first page
-   break, while one on the grid continues down every page the grid spans. */
-.cv-aside {
-  background: var(--aside);
+/* ── CV sheets ─────────────────────────────────────────────────────────
+   The CV is two fixed A4 sheets rather than one flowing document. A flowing
+   document with @page{margin:0} — which edge-to-edge sidebar tint requires —
+   gets no top margin on its continuation pages, so text is sliced at the page
+   boundary. Fixed sheets give each page its own padding and its own sidebar. */
+.cv-root {
+  background: #e9e8e6;
+  padding-bottom: 3rem;
+}
+
+.cv-sheet {
+  width: 100%;
+  max-width: 210mm;
+  margin: 0 auto 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 @media (min-width: 640px) {
-  .cv-grid {
-    background: linear-gradient(to right, var(--aside) 0 32%, #ffffff 32%);
-  }
-
-  .cv-aside {
-    background: transparent;
+  .cv-sheet {
+    min-height: 297mm;
   }
 }
 
+.cv-aside {
+  position: relative;
+}
+
+/* Stretched explicitly: an absolutely positioned <img> with top/bottom set but
+   height:auto keeps its intrinsic ratio instead of filling, so the height has to
+   be stated. object-fit:fill stops the 1:1 viewBox forcing a square. */
+.cv-tint {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.cv-name {
+  font-size: 2.15rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1.05;
+}
+
+.cv-subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(17, 17, 17, 0.55);
+}
+
+/* Sheet two carries experience, projects and references; it needs a tighter
+   rhythm than sheet one to stay inside 297mm. */
+.cv-compact .cv-main section {
+  margin-bottom: 1rem;
+}
+
+.cv-compact .cv-main li,
+.cv-compact .cv-main p {
+  font-size: 0.76rem;
+  line-height: 1.3;
+}
+
+.cv-compact .cv-main h3 {
+  font-size: 0.84rem;
+}
+
+.cv-compact .cv-main ul {
+  margin-top: 0.25rem;
+}
+
+.cv-compact .cv-main .space-y-4 > * + * {
+  margin-top: 0.7rem;
+}
+
 @media print {
-  /* No page margin: the sidebar runs to the paper's edge, as in the source CV.
-     Each column carries its own padding instead. */
   @page {
     size: A4;
     margin: 0;
@@ -100,8 +174,36 @@ a:hover {
     font-size: 10pt;
   }
 
-  .cv-page {
+  .cv-root {
+    background: none;
+    padding: 0;
+  }
+
+  /* Exactly one sheet per page: fixed height, own padding, hard break after.
+     The last sheet must not break or the PDF gains a trailing blank page. */
+  .cv-sheet {
+    width: 210mm;
+    height: 297mm;
     max-width: none;
+    min-height: 0;
+    margin: 0;
+    box-shadow: none;
+    grid-template-columns: 32% 1fr;
+    break-after: page;
+    break-inside: avoid;
+    overflow: hidden;
+  }
+
+  .cv-sheet:last-child {
+    break-after: auto;
+  }
+
+  .cv-aside {
+    padding: 13mm 7mm 13mm 9mm;
+  }
+
+  .cv-main {
+    padding: 13mm 9mm 13mm 7mm;
   }
 
   /* rem stays root-relative while body drops to 10pt, so the name is sized in pt
@@ -114,30 +216,6 @@ a:hover {
     font-size: 8pt;
   }
 
-  .cv-grid {
-    background: linear-gradient(to right, var(--aside) 0 32%, #ffffff 32%);
-    /* Without this Chrome drops the sidebar tint when printing. */
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    grid-template-columns: 32% 1fr;
-  }
-
-  .cv-aside {
-    background: transparent;
-    padding: 14mm 7mm 14mm 9mm;
-  }
-
-  .cv-main {
-    padding: 14mm 9mm 14mm 7mm;
-  }
-
-  /* Note: break-before:page on a sidebar section does nothing here — Chrome's
-     print engine ignores forced breaks inside a grid column. The stack flows
-     across the page break instead, and break-inside-avoid on each group keeps
-     any single group whole. */
-
-  /* No entry may straddle a page boundary. */
-  .role,
   .break-inside-avoid {
     break-inside: avoid;
   }

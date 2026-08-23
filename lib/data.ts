@@ -83,10 +83,11 @@ export const projects: Project[] = [
   },
   {
     name: 'Personal API',
-    stack: 'FastAPI, Python, OAuth 2.0',
+    stack: 'FastAPI, Python, OAuth 2.0, AI chat interface',
     bullets: [
       'FastAPI service unifying my own Google data across three accounts behind one plugin interface, so each source is a plugin rather than a special case.',
       'Stores nothing — it queries live instead of mirroring, which removed sync cursors, periodic re-baselines and deletion tombstones from the design entirely.',
+      'Agent-facing by design: an AI assistant queries it directly over HTTP. Built as REST rather than an MCP server so cron jobs, shell scripts and a chat client can all call the same endpoints.',
     ],
   },
 ]

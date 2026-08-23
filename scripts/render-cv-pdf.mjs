@@ -41,11 +41,35 @@ if (!response || response.status() !== 200) {
   process.exit(1)
 }
 await page.emulateMedia({ media: 'print' })
+
+// Each sheet is a fixed 297mm box with overflow:hidden, so content that does not
+// fit is silently clipped — exactly the failure a PDF hides. Measure it instead.
+const overflows = await page.evaluate(() =>
+  [...document.querySelectorAll('.cv-sheet')].map((sheet, index) => ({
+    index: index + 1,
+    overflow: sheet.scrollHeight - sheet.clientHeight,
+  })),
+)
+// scrollHeight is clamped to clientHeight, so this detects overflow only — it
+// cannot measure how much room is left on a sheet that fits.
+for (const sheet of overflows) {
+  console.log(`  sheet ${sheet.index}: ${sheet.overflow > 2 ? `OVERFLOWS by ${sheet.overflow}px` : 'fits'}`)
+}
+const clipped = overflows.filter((sheet) => sheet.overflow > 2)
+if (clipped.length) {
+  console.error(
+    'FAILED: content is clipped —\n' +
+      clipped.map((s) => `  - sheet ${s.index} overflows by ${s.overflow}px`).join('\n'),
+  )
+  await browser.close()
+  server.close()
+  process.exit(1)
+}
 await page.pdf({
   path: 'cv.pdf',
   format: 'A4',
   margin: { top: "0", bottom: "0", left: "0", right: "0" },
-  printBackground: true,
+  printBackground: false,
 })
 
 await browser.close()
