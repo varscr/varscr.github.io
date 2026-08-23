@@ -173,7 +173,7 @@ export type Profile = {
 export const profile: Profile = {
   name: 'Fabio Vargas',
   role: 'AI & Full-Stack Engineer',
-  lead: 'I build multi-agent AI systems. Most recently at Janover, where I shipped Burrito — a conversational platform routing 12+ specialised agents on FastAPI and Azure OpenAI.',
+  lead: 'I work on multi-agent AI systems. At Janover I built features across Burrito — a conversational platform routing 12+ specialised agents on FastAPI and Azure OpenAI.',
   email: 'fhvargas.work@gmail.com',
   links: [
     { label: 'GitHub', href: 'https://github.com/varscr', display: 'github.com/varscr' },
@@ -203,13 +203,13 @@ export const roles: Role[] = [
     start: 'Jun 2025',
     end: 'Jan 2026',
     summary:
-      'Built Burrito, a multi-agent conversational AI platform routing 12+ specialised agents, alongside the core fintech product.',
+      'Built features across Burrito, a multi-agent conversational AI platform routing 12+ specialised agents, and the core fintech product.',
     bullets: [
-      'Built Burrito, a multi-agent conversational AI platform on FastAPI and Azure OpenAI, with 12+ specialised chatbots behind dynamic routing and fallback.',
-      'Designed an AgentFactory pattern for dynamic agent instantiation.',
-      'Implemented MongoDB distributed locking so concurrent AI sessions could not corrupt shared state.',
-      'Added context compaction to hold long multi-turn conversations inside model token limits.',
-      'Developed the core fintech platform in Nuxt, Nitro, TypeScript and MongoDB, with Auth0 and JWT authentication and GitHub Actions CI/CD.',
+      'Developed features for Burrito, a multi-agent conversational AI platform on FastAPI and Azure OpenAI serving 12+ specialised chatbots with dynamic routing and fallback.',
+      'Worked on the AgentFactory pattern for dynamic agent instantiation.',
+      'Implemented MongoDB distributed locking to keep concurrent AI sessions from corrupting shared state.',
+      'Contributed context compaction to hold long multi-turn conversations inside model token limits.',
+      'Developed features in the core fintech platform — Nuxt, Nitro, TypeScript and MongoDB — with Auth0 and JWT authentication and GitHub Actions CI/CD.',
     ],
     tags: ['FastAPI', 'Azure OpenAI', 'Nuxt', 'MongoDB'],
   },
@@ -291,6 +291,7 @@ export const stack: Record<string, string[]> = {
   Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
   Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'Cloudflare Workers', 'Auth0', 'JWT'],
   AI: ['Multi-agent systems', 'LLM orchestration', 'Azure OpenAI', 'Context compaction', 'Token management'],
+  Tools: ['Cursor', 'Claude Code', 'BrowserStack', 'Postman'],
 }
 
 export const languages = 'Spanish (native) · English (advanced, B2/C1)'
@@ -1157,6 +1158,12 @@ Expected: at least `1`. Allow a minute or two for Pages to rebuild.
 
 ## Open questions for Fabio
 
-1. **Janover title.** The plan uses your real title, **Full-Stack Software Developer**, and lets the Burrito bullets carry the AI weight. Calling it "AI Engineer" would read stronger but would not be what you were called. Keep the real one?
-2. **Vitest and Playwright** are added as devDependencies for the tests and the PDF check. They never ship to the browser. Fine?
-3. **`profile.lead`** currently reads: *"I build multi-agent AI systems. Most recently at Janover, where I shipped Burrito — a conversational platform routing 12+ specialised agents on FastAPI and Azure OpenAI."* This is the one sentence a recruiter actually reads. Change anything?
+Answered 2026-08-23:
+
+1. **Janover title** — real title, *Full-Stack Software Developer*. The Burrito
+   bullets carry the AI weight.
+2. **Vitest and Playwright** — both approved as devDependencies.
+3. **Ownership language** — Fabio collaborated on Burrito and built features
+   within it; he did not build it alone. Every Janover bullet is scoped to
+   contribution, not ownership. Cursor and Claude Code appear under Tools in
+   the stack, not in the lead sentence.
