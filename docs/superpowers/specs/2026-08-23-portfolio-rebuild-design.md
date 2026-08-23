@@ -94,13 +94,11 @@ Languages: Spanish native, English advanced (B2/C1).
 
 ### Excluded, deliberately
 
-- **The teaching role** (listed on older CVs as "Monitor and Instructor in
-  Programming and Robotics", Colegio San Luis / Colegio de Fátima de la
-  Policía). Fabio's instruction on 2026-08-22: he was an assistant, not a
-  teacher, and the entry overstated the role. It does not appear on the site or
-  the CV, and the "mentored students / taught programming" framing is not
-  reused anywhere. Jul–Dec 2023 is covered by the cybersecurity diploma and the
-  final semester at UniHorizonte, so removing it leaves no visible gap.
+- **The teaching role** listed on older CVs (Colegio San Luis / Colegio de
+  Fátima de la Policía). Excluded at Fabio's request — it was an assistant
+  position and not engineering work. Jul–Dec 2023 is covered by the
+  cybersecurity diploma and the final semester at UniHorizonte, so removing it
+  leaves no visible gap.
 - **RobinFood** (Data Entry Specialist, Nov 2022 – Apr 2023, the UniHorizonte
   apprenticeship). Real, verified by a university letter dated Oct 2022, but
   excluded by Fabio's choice — it is not engineering work.
