@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { earlierCareer, education, profile, roles, selectedWork, stack } from './data'
+import { certifications, earlierCareer, education, profile, projects, roles, stack } from './data'
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
@@ -52,27 +52,9 @@ describe('excluded history', () => {
   const EXCLUDED = ['San Luis', 'Fátima', 'Fatima', 'Robin', 'Foundever', 'Monitor and Instructor', 'robotics']
 
   it('appears nowhere in the data', () => {
-    const serialised = JSON.stringify({ profile, roles, selectedWork, earlierCareer, education, stack })
+    const serialised = JSON.stringify({ profile, roles, projects, earlierCareer, education, stack })
     for (const term of EXCLUDED) {
       expect(serialised, `"${term}" must not appear`).not.toContain(term)
-    }
-  })
-})
-
-describe('selected work', () => {
-  it('names each piece and says something about it', () => {
-    expect(selectedWork.length).toBeGreaterThan(0)
-    for (const work of selectedWork) {
-      expect(work.name.length, 'name').toBeGreaterThan(0)
-      expect(work.context.length, `${work.name} context`).toBeGreaterThan(0)
-      expect(work.body.length, `${work.name} body`).toBeGreaterThan(80)
-    }
-  })
-
-  it('only describes work that a role on the timeline accounts for', () => {
-    const orgs = new Set([...roles.map((r) => r.org), 'Independent'])
-    for (const work of selectedWork) {
-      expect(orgs.has(work.context), `${work.name} context "${work.context}"`).toBe(true)
     }
   })
 })
@@ -81,5 +63,46 @@ describe('profile', () => {
   it('uses the work email, never the personal one', () => {
     expect(profile.email).toBe('fhvargas.work@gmail.com')
     expect(JSON.stringify(profile)).not.toContain('vargassanchezfabio01')
+  })
+})
+
+describe('stack', () => {
+  it('no longer lists C# or .NET anywhere', () => {
+    const serialised = JSON.stringify({ profile, roles, projects, stack, certifications })
+    expect(serialised).not.toMatch(/C#/)
+    expect(serialised).not.toMatch(/\.NET/i)
+  })
+})
+
+describe('projects', () => {
+  // The infra notes are full of domains, IPs, hostnames and a real client's name.
+  // None of it belongs in a document that gets uploaded to job boards.
+  const LEAKS = [
+    'clinicadelauto',
+    'varscr.com',
+    '192.168',
+    '100.105',
+    'tail663b5f',
+    'Clínica del Auto',
+    'immich.',
+    'portainer.',
+    'dozzle.',
+    'finance.varscr',
+  ]
+
+  it('describes the work without leaking infrastructure detail', () => {
+    const serialised = JSON.stringify(projects)
+    for (const leak of LEAKS) {
+      expect(serialised, `"${leak}" must not reach a public document`).not.toContain(leak)
+    }
+  })
+
+  it('says something substantive about each project', () => {
+    expect(projects.length).toBeGreaterThan(0)
+    for (const project of projects) {
+      expect(project.name.length, 'name').toBeGreaterThan(0)
+      expect(project.stack.length, `${project.name} stack`).toBeGreaterThan(0)
+      expect(project.bullets.length, `${project.name} bullets`).toBeGreaterThan(0)
+    }
   })
 })

@@ -286,7 +286,7 @@ export const education: Education[] = [
 ]
 
 export const stack: Record<string, string[]> = {
-  Languages: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C# (.NET)'],
+  Languages: ['TypeScript', 'JavaScript', 'Python', 'Java'],
   Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Tailwind'],
   Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
   Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'Cloudflare Workers', 'Auth0', 'JWT'],

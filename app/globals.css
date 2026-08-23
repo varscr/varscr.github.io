@@ -5,6 +5,7 @@
   --paper: #faf9f7;
   --mint: #64ffda;
   --rule: rgba(17, 17, 17, 0.14);
+  --aside: #f1f0ee;
 }
 
 @theme inline {
@@ -46,28 +47,94 @@ a:hover {
   text-decoration-color: var(--ink);
 }
 
+.cv-name {
+  font-size: 2.15rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1.05;
+}
+
+.cv-subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(17, 17, 17, 0.55);
+}
+
+/* ── CV two-column shell ───────────────────────────────────────────────
+   The sidebar's grey is painted by a gradient on the grid, not by the aside's
+   own background: a background on the column would stop at the first page
+   break, while one on the grid continues down every page the grid spans. */
+.cv-aside {
+  background: var(--aside);
+}
+
+@media (min-width: 640px) {
+  .cv-grid {
+    background: linear-gradient(to right, var(--aside) 0 32%, #ffffff 32%);
+  }
+
+  .cv-aside {
+    background: transparent;
+  }
+}
+
 @media print {
+  /* No page margin: the sidebar runs to the paper's edge, as in the source CV.
+     Each column carries its own padding instead. */
   @page {
     size: A4;
-    margin: 18mm;
+    margin: 0;
   }
 
   :root {
-    --ink: #000000;
+    --ink: #111111;
     --paper: #ffffff;
     --rule: rgba(0, 0, 0, 0.25);
   }
 
   body {
     background: #ffffff;
-    color: #000000;
-    font-size: 10.5pt;
+    font-size: 10pt;
   }
 
-  .cv {
+  .cv-page {
     max-width: none;
-    padding: 0;
   }
+
+  /* rem stays root-relative while body drops to 10pt, so the name is sized in pt
+     to keep the same proportion to body text as the source CV. */
+  .cv-name {
+    font-size: 26pt;
+  }
+
+  .cv-subtitle {
+    font-size: 8pt;
+  }
+
+  .cv-grid {
+    background: linear-gradient(to right, var(--aside) 0 32%, #ffffff 32%);
+    /* Without this Chrome drops the sidebar tint when printing. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    grid-template-columns: 32% 1fr;
+  }
+
+  .cv-aside {
+    background: transparent;
+    padding: 14mm 7mm 14mm 9mm;
+  }
+
+  .cv-main {
+    padding: 14mm 9mm 14mm 7mm;
+  }
+
+  /* Note: break-before:page on a sidebar section does nothing here — Chrome's
+     print engine ignores forced breaks inside a grid column. The stack flows
+     across the page break instead, and break-inside-avoid on each group keeps
+     any single group whole. */
 
   /* No entry may straddle a page boundary. */
   .role,
@@ -78,7 +145,4 @@ a:hover {
   a {
     text-decoration: none;
   }
-
-  /* No ::after URL injection: every link on the CV already shows its URL as its
-     own link text, so appending href duplicated it and broke the header line. */
 }

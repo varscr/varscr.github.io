@@ -107,7 +107,7 @@ Languages: Spanish native, English advanced (B2/C1).
 
 ### Stack
 
-- Languages: TypeScript, JavaScript, Python, Java, C# (.NET)
+- Languages: TypeScript, JavaScript, Python, Java
 - Frameworks: FastAPI, Nuxt, Next, NestJS, Node, Tailwind
 - Data: MongoDB, PostgreSQL, MySQL, SQL Server, Drizzle, Prisma
 - Infrastructure: Docker, Linux, Git, GitHub Actions, Cloudflare Workers, Auth0, JWT

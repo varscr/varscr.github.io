@@ -1,4 +1,4 @@
-import { profile, selectedWork } from '@/lib/data'
+import { profile, projects, roles } from '@/lib/data'
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -27,26 +27,40 @@ export default function Home() {
         <div aria-hidden className="mt-4 h-[2px] w-16 bg-mint" />
         <p className="mt-5 text-base text-ink/70">{profile.role}</p>
         <p className="mt-1 text-sm text-ink/50">{profile.keywords}</p>
-
-        <p className="mt-10 text-lg leading-relaxed">{profile.lead}</p>
       </header>
 
       <section className="mt-16">
-        <SectionHeading>Now</SectionHeading>
-        <p className="text-[1.05rem] leading-relaxed">{profile.now}</p>
+        <SectionHeading>About</SectionHeading>
+        <p className="text-lg leading-relaxed">{profile.lead}</p>
+        <p className="mt-4 text-ink/70">{profile.now}</p>
       </section>
 
       <section className="mt-16">
-        <SectionHeading>Selected work</SectionHeading>
-        <div className="space-y-10">
-          {selectedWork.map((work) => (
-            <article key={work.name}>
-              <h3 className="text-lg font-semibold">
-                {work.name}
-                <span className="ml-2 text-sm font-normal text-ink/50">{work.context}</span>
-              </h3>
-              <p className="mt-2 leading-relaxed text-ink/85">{work.body}</p>
-              <p className="mt-3 text-sm text-ink/45">{work.tags.join(' · ')}</p>
+        <SectionHeading>Experience</SectionHeading>
+        <div className="space-y-7">
+          {roles.map((role) => (
+            <article key={`${role.org}-${role.start}`}>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="font-semibold">{role.org}</h3>
+                <span className="tabular text-sm text-ink/50">
+                  {role.start} – {role.end}
+                </span>
+              </div>
+              <p className="text-sm text-ink/60">{role.title}</p>
+              <p className="mt-2 leading-relaxed text-ink/85">{role.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-16">
+        <SectionHeading>Projects</SectionHeading>
+        <div className="space-y-8">
+          {projects.map((project) => (
+            <article key={project.name}>
+              <h3 className="font-semibold">{project.name}</h3>
+              <p className="mt-2 leading-relaxed text-ink/85">{project.bullets[0]}</p>
+              <p className="mt-3 text-sm text-ink/45">{project.stack}</p>
             </article>
           ))}
         </div>

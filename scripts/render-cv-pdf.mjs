@@ -44,8 +44,8 @@ await page.emulateMedia({ media: 'print' })
 await page.pdf({
   path: 'cv.pdf',
   format: 'A4',
-  margin: { top: '18mm', bottom: '18mm', left: '18mm', right: '18mm' },
-  printBackground: false,
+  margin: { top: "0", bottom: "0", left: "0", right: "0" },
+  printBackground: true,
 })
 
 await browser.close()

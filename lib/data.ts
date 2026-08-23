@@ -11,12 +11,16 @@ export type Role = {
   tags?: string[]
 }
 
-export type Work = {
+export type Project = {
   name: string
-  context: string
-  body: string
-  tags: string[]
+  note?: string
+  stack: string
+  bullets: string[]
 }
+
+export type Certification = { name: string; year: string }
+
+export type Reference = { name: string; role: string; contact: string }
 
 export type Education = {
   institution: string
@@ -55,21 +59,57 @@ export const profile: Profile = {
   ],
 }
 
-/** Portfolio only — the two pieces of work worth reading about. */
-export const selectedWork: Work[] = [
+/**
+ * CV-only. Deliberately capability-level: no domains, IP addresses, client names
+ * or service hostnames from the infra notes reach a document that gets uploaded
+ * to job boards.
+ */
+export const projects: Project[] = [
   {
-    name: 'Burrito',
-    context: 'Janover',
-    body: 'A production multi-agent conversational AI platform serving 12+ specialised chatbots with dynamic routing and fallback, on Azure OpenAI and FastAPI. I contributed the AgentFactory pattern for dynamic agent instantiation, MongoDB distributed locking so concurrent sessions could not corrupt shared state, and context compaction to hold long multi-turn conversations inside model token limits.',
-    tags: ['FastAPI', 'Azure OpenAI', 'MongoDB'],
+    name: 'Self-hosted infrastructure',
+    stack: 'Linux, Docker Compose, Tailscale, Caddy, Cloudflare Tunnel',
+    bullets: [
+      'Run an always-on Linux server with a Docker Compose stack split across two deliberately separate access planes — a public tunnel for what should be reachable, and a private Tailscale network fronted by Caddy with real certificates for everything administrative.',
+      'Self-host a photo library replacing Google Photos, a finance notification ingest service, and container monitoring, with automated update sweeps and a bare-metal disaster-recovery runbook.',
+    ],
   },
   {
-    name: 'Manasara',
-    context: 'Independent',
-    body: 'A luxury real estate site for a client in Indonesia, running on Cloudflare Workers. Built end to end — layout, content model, and deployment — and verified across browsers and iOS devices with BrowserStack.',
-    tags: ['Cloudflare Workers', 'TypeScript'],
+    name: 'Kargo',
+    stack: 'Nuxt 3, Nitro, Drizzle ORM, PostgreSQL, Docker',
+    bullets: [
+      'Multi-tenant business operations tool covering products, categories, services and sales for a vehicle parts business.',
+      'Cut the schema from 12 tables to 5 when the original scope outgrew what the business actually needed — the removals were the design work.',
+    ],
+  },
+  {
+    name: 'Personal API',
+    stack: 'FastAPI, Python, OAuth 2.0',
+    bullets: [
+      'FastAPI service unifying my own Google data across three accounts behind one plugin interface, so each source is a plugin rather than a special case.',
+      'Stores nothing — it queries live instead of mirroring, which removed sync cursors, periodic re-baselines and deletion tombstones from the design entirely.',
+    ],
   },
 ]
+
+export const certifications: Certification[] = [
+  { name: 'Angular & OpenAI API', year: '2024' },
+  { name: 'Spring Boot', year: '2024' },
+  { name: 'Java: Zero to Expert', year: '2023' },
+  { name: 'SOLID & Clean Code', year: '2022' },
+  { name: 'Node.js: Zero to Expert', year: '2022' },
+  { name: 'TypeScript Complete', year: '2022' },
+  { name: 'Git & GitHub Pro', year: '2022' },
+]
+
+export const references: Reference[] = [
+  { name: 'Gustavo Lemos', role: 'VP, Product & Operations, Janover', contact: 'gustavo@janover.co' },
+  { name: 'Daniel Castillo Salej', role: 'Senior Software Developer', contact: '+57 301 163 7446' },
+  { name: 'Alejandro Bermúdez Rojas', role: 'Tech Lead', contact: '+57 305 706 6856' },
+]
+
+/** The CV's ABOUT block — longer and more formal than the portfolio's lead. */
+export const about =
+  'AI-focused Full-Stack Engineer with production experience building multi-agent conversational AI platforms and scalable web applications. Contributed to an enterprise AI system serving 12+ specialized chatbots powered by Azure OpenAI, working on agent orchestration, distributed locking, and context compaction for long-running LLM sessions. Currently an AI Developer at NeuralSeek and TechD, and pursuing a Master’s in Artificial Intelligence.'
 
 export const roles: Role[] = [
   {
@@ -98,7 +138,7 @@ export const roles: Role[] = [
   },
   {
     org: 'Independent Contractor',
-    title: 'Software Engineer',
+    title: 'Freelance Developer',
     location: 'Remote',
     start: 'Jan 2026',
     end: 'Apr 2026',
@@ -166,41 +206,34 @@ export const earlierCareer = {
 
 export const education: Education[] = [
   {
-    institution: 'Udacity Institute of AI & Technology',
-    programme: 'MS, Artificial Intelligence',
+    institution: 'Udacity',
+    programme: "Master's in Artificial Intelligence",
     start: 'Jan 2026',
     end: 'Jun 2027',
     note: 'expected',
   },
   {
-    institution: 'Fundación Universitaria Horizonte',
-    programme: 'BSc, Computer Software Engineering',
-    start: 'Jan 2020',
+    institution: 'UniHorizonte',
+    programme: 'B.S. in Software Engineering',
+    start: 'Feb 2021',
     end: 'Nov 2023',
-    note: 'acta de grado April 2026',
   },
   {
-    institution: 'Fundación Universitaria Horizonte',
-    programme: 'Diplomado en Ciberseguridad',
+    institution: 'UniHorizonte',
+    programme: 'Diploma in Cybersecurity',
     start: 'Jun 2023',
     end: 'Aug 2023',
   },
   {
     institution: 'SENA',
-    programme: 'Tecnólogo en Producción Multimedia',
+    programme: 'Multimedia Technology',
     start: 'Feb 2019',
     end: 'Aug 2020',
-  },
-  {
-    institution: 'SENA',
-    programme: 'Técnico en Programación de Software',
-    start: 'Feb 2016',
-    end: 'Nov 2018',
   },
 ]
 
 export const stack: Record<string, string[]> = {
-  Languages: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C# (.NET)'],
+  Languages: ['TypeScript', 'JavaScript', 'Python', 'Java'],
   Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Vue', 'Tailwind'],
   Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
   Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'AWS', 'Cloudflare Workers', 'Auth0', 'JWT'],
@@ -208,4 +241,7 @@ export const stack: Record<string, string[]> = {
   Tools: ['Cursor', 'Claude Code', 'BrowserStack', 'Postman'],
 }
 
-export const languages = 'Spanish (native) · English (professional working, B2/C1)'
+export const spokenLanguages = [
+  { name: 'Spanish', level: 'Native' },
+  { name: 'English', level: 'Advanced (B2/C1)' },
+]
