@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { earlierCareer, education, profile, roles, stack } from './data'
+import { earlierCareer, education, profile, roles, selectedWork, stack } from './data'
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
@@ -27,17 +27,23 @@ describe('roles', () => {
     }
   })
 
-  it('has exactly one current role, and it is first', () => {
+  it('puts the current roles first', () => {
+    // NeuralSeek and TechD run concurrently, so "current" is not a single row.
     const current = roles.filter((role) => role.end === 'present')
-    expect(current).toHaveLength(1)
-    expect(roles[0].end).toBe('present')
+    expect(current.length).toBeGreaterThan(0)
+    expect(roles.slice(0, current.length).every((role) => role.end === 'present')).toBe(true)
   })
 
-  it('runs continuously from Jan 2024 with no gap', () => {
-    const recent = roles.filter((role) => sortKey(role.start) >= sortKey('Jan 2024'))
-    for (let i = 0; i < recent.length - 1; i += 1) {
-      const gap = sortKey(recent[i].start) - sortKey(recent[i + 1].end)
-      expect(gap, `gap before ${recent[i].org}`).toBeLessThanOrEqual(1)
+  it('covers every month from Jan 2024 to now with no gap', () => {
+    // Concurrent roles overlap, so check month coverage rather than adjacency.
+    const now = sortKey('Apr 2026')
+    const covered = new Set<number>()
+    for (const role of roles) {
+      const end = role.end === 'present' ? now : sortKey(role.end)
+      for (let m = sortKey(role.start); m <= end; m += 1) covered.add(m)
+    }
+    for (let m = sortKey('Jan 2024'); m <= now; m += 1) {
+      expect(covered.has(m), `no role covers month index ${m}`).toBe(true)
     }
   })
 })
@@ -46,9 +52,27 @@ describe('excluded history', () => {
   const EXCLUDED = ['San Luis', 'Fátima', 'Fatima', 'Robin', 'Foundever', 'Monitor and Instructor', 'robotics']
 
   it('appears nowhere in the data', () => {
-    const serialised = JSON.stringify({ profile, roles, earlierCareer, education, stack })
+    const serialised = JSON.stringify({ profile, roles, selectedWork, earlierCareer, education, stack })
     for (const term of EXCLUDED) {
       expect(serialised, `"${term}" must not appear`).not.toContain(term)
+    }
+  })
+})
+
+describe('selected work', () => {
+  it('names each piece and says something about it', () => {
+    expect(selectedWork.length).toBeGreaterThan(0)
+    for (const work of selectedWork) {
+      expect(work.name.length, 'name').toBeGreaterThan(0)
+      expect(work.context.length, `${work.name} context`).toBeGreaterThan(0)
+      expect(work.body.length, `${work.name} body`).toBeGreaterThan(80)
+    }
+  })
+
+  it('only describes work that a role on the timeline accounts for', () => {
+    const orgs = new Set([...roles.map((r) => r.org), 'Independent'])
+    for (const work of selectedWork) {
+      expect(orgs.has(work.context), `${work.name} context "${work.context}"`).toBe(true)
     }
   })
 })

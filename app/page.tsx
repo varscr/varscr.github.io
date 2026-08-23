@@ -1,11 +1,8 @@
-import Link from 'next/link'
-import Stack from '@/components/Stack'
-import Timeline from '@/components/Timeline'
-import { earlierCareer, education, languages, profile } from '@/lib/data'
+import { profile, selectedWork } from '@/lib/data'
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">
+    <h2 className="mb-8 text-xs font-semibold uppercase tracking-[0.18em] text-ink/45">
       {children}
     </h2>
   )
@@ -13,60 +10,51 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-20 sm:py-28">
+    <main className="mx-auto max-w-2xl px-6 py-20 sm:py-28">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{profile.name}</h1>
-        <div aria-hidden className="mt-3 h-[2px] w-16 bg-mint" />
-        <p className="mt-4 text-base text-ink/70">{profile.role}</p>
-        <p className="measure mt-8 text-lg leading-relaxed">{profile.lead}</p>
+        <picture>
+          <source srcSet={profile.photo.webp} type="image/webp" />
+          <img
+            src={profile.photo.jpg}
+            alt={profile.photo.alt}
+            width={112}
+            height={112}
+            className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28"
+          />
+        </picture>
+
+        <h1 className="mt-8 text-4xl font-semibold tracking-tight sm:text-5xl">{profile.name}</h1>
+        <div aria-hidden className="mt-4 h-[2px] w-16 bg-mint" />
+        <p className="mt-5 text-base text-ink/70">{profile.role}</p>
+        <p className="mt-1 text-sm text-ink/50">{profile.keywords}</p>
+
+        <p className="mt-10 text-lg leading-relaxed">{profile.lead}</p>
       </header>
 
-      <section className="mt-20">
-        <SectionHeading>Experience</SectionHeading>
-        <Timeline variant="web" />
-        <div className="mt-10 grid gap-1 text-sm text-ink/55 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-          <span>{earlierCareer.label.replace('Earlier — ', '')}</span>
-          <span>{earlierCareer.items.join(' · ')}</span>
-        </div>
+      <section className="mt-16">
+        <SectionHeading>Now</SectionHeading>
+        <p className="text-[1.05rem] leading-relaxed">{profile.now}</p>
       </section>
 
-      <section className="mt-20">
-        <SectionHeading>Education</SectionHeading>
-        <div className="space-y-4">
-          {education.map((entry) => (
-            <div
-              key={`${entry.institution}-${entry.programme}`}
-              className="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6"
-            >
-              <div className="tabular text-sm text-ink/55">
-                {entry.start}
-                <span className="mx-1 sm:hidden">–</span>
-                <span className="sm:block">{entry.end}</span>
-              </div>
-              <div>
-                <p className="text-[0.95rem]">{entry.programme}</p>
-                <p className="text-sm text-ink/60">
-                  {entry.institution}
-                  {entry.note ? ` · ${entry.note}` : ''}
-                </p>
-              </div>
-            </div>
+      <section className="mt-16">
+        <SectionHeading>Selected work</SectionHeading>
+        <div className="space-y-10">
+          {selectedWork.map((work) => (
+            <article key={work.name}>
+              <h3 className="text-lg font-semibold">
+                {work.name}
+                <span className="ml-2 text-sm font-normal text-ink/50">{work.context}</span>
+              </h3>
+              <p className="mt-2 leading-relaxed text-ink/85">{work.body}</p>
+              <p className="mt-3 text-sm text-ink/45">{work.tags.join(' · ')}</p>
+            </article>
           ))}
         </div>
-        <div className="mt-6 grid gap-1 text-sm text-ink/55 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-          <span>Spoken</span>
-          <span>{languages}</span>
-        </div>
       </section>
 
-      <section className="mt-20">
-        <SectionHeading>Stack</SectionHeading>
-        <Stack />
-      </section>
-
-      <section className="mt-20">
+      <section className="mt-16">
         <SectionHeading>Contact</SectionHeading>
-        <ul className="space-y-2 text-[0.95rem]">
+        <ul className="space-y-2">
           <li>
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
           </li>
@@ -77,9 +65,6 @@ export default function Home() {
               </a>
             </li>
           ))}
-          <li>
-            <Link href="/cv">Curriculum vitae</Link>
-          </li>
         </ul>
       </section>
     </main>

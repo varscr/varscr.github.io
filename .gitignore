@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 cv.pdf
+
+# The CV is local only — never committed, never deployed.
+app/cv/
+cv.pdf
+cv.html

@@ -11,6 +11,13 @@ export type Role = {
   tags?: string[]
 }
 
+export type Work = {
+  name: string
+  context: string
+  body: string
+  tags: string[]
+}
+
 export type Education = {
   institution: string
   programme: string
@@ -22,7 +29,10 @@ export type Education = {
 export type Profile = {
   name: string
   role: string
+  keywords: string
+  photo: { webp: string; jpg: string; alt: string }
   lead: string
+  now: string
   email: string
   links: Link[]
 }
@@ -30,7 +40,14 @@ export type Profile = {
 export const profile: Profile = {
   name: 'Fabio Vargas',
   role: 'AI & Full-Stack Engineer',
-  lead: 'I work on multi-agent AI systems. At Janover I built features across Burrito — a conversational platform routing 12+ specialised agents on FastAPI and Azure OpenAI.',
+  keywords: 'TypeScript · Python · FastAPI · Multi-agent AI platforms',
+  photo: {
+    webp: '/fabio.webp',
+    jpg: '/fabio.jpg',
+    alt: 'Fabio Vargas',
+  },
+  lead: 'I build AI-powered platforms — multi-agent systems, LLM orchestration, and the backends that hold them up. At Janover I contributed to Burrito, a production platform routing 12+ specialised chatbots. I am now an AI Developer at NeuralSeek and TechD, and partway through a master’s in AI at Udacity.',
+  now: 'AI Developer at NeuralSeek and TechD — remote from Bogotá.',
   email: 'fhvargas.work@gmail.com',
   links: [
     { label: 'GitHub', href: 'https://github.com/varscr', display: 'github.com/varscr' },
@@ -38,15 +55,55 @@ export const profile: Profile = {
   ],
 }
 
+/** Portfolio only — the two pieces of work worth reading about. */
+export const selectedWork: Work[] = [
+  {
+    name: 'Burrito',
+    context: 'Janover',
+    body: 'A production multi-agent conversational AI platform serving 12+ specialised chatbots with dynamic routing and fallback, on Azure OpenAI and FastAPI. I contributed the AgentFactory pattern for dynamic agent instantiation, MongoDB distributed locking so concurrent sessions could not corrupt shared state, and context compaction to hold long multi-turn conversations inside model token limits.',
+    tags: ['FastAPI', 'Azure OpenAI', 'MongoDB'],
+  },
+  {
+    name: 'Manasara',
+    context: 'Independent',
+    body: 'A luxury real estate site for a client in Indonesia, running on Cloudflare Workers. Built end to end — layout, content model, and deployment — and verified across browsers and iOS devices with BrowserStack.',
+    tags: ['Cloudflare Workers', 'TypeScript'],
+  },
+]
+
 export const roles: Role[] = [
+  {
+    org: 'NeuralSeek',
+    title: 'AI Developer',
+    location: 'Florida, United States · remote',
+    start: 'Apr 2026',
+    end: 'present',
+    summary: 'Building on NeuralSeek, an enterprise platform for LLM applications.',
+    bullets: [
+      'Develop features for NeuralSeek, an enterprise platform for building and governing LLM applications.',
+    ],
+    tags: ['Python', 'LLM platforms'],
+  },
+  {
+    org: 'TechD',
+    title: 'AI Developer',
+    location: 'Florida, United States · remote',
+    start: 'Apr 2026',
+    end: 'present',
+    summary: 'AI and full-stack development at TechD (Tech Dynamics), an IBM Platinum business partner.',
+    bullets: [
+      'AI and full-stack development at TechD (Tech Dynamics), an IBM Platinum business partner.',
+    ],
+    tags: ['TypeScript', 'Python'],
+  },
   {
     org: 'Independent Contractor',
     title: 'Software Engineer',
     location: 'Remote',
     start: 'Jan 2026',
-    end: 'present',
+    end: 'Apr 2026',
     summary:
-      'Building Manasara, a luxury real estate platform for a client in Indonesia, on Cloudflare Workers.',
+      'Built Manasara, a luxury real estate platform for a client in Indonesia, on Cloudflare Workers.',
     bullets: [
       'Built and shipped Manasara, a luxury real estate site for a client in Indonesia, running on Cloudflare Workers.',
       'Verified responsive layouts across browsers and iOS devices with BrowserStack.',
@@ -75,7 +132,7 @@ export const roles: Role[] = [
     title: 'Application Support Engineer',
     location: 'Bogotá, Colombia',
     start: 'Jun 2024',
-    end: 'Jun 2025',
+    end: 'May 2025',
     summary: 'Ran production Linux and IIS servers behind critical database systems.',
     bullets: [
       'Managed production Linux and IIS servers for critical database systems, owning stability and performance.',
@@ -109,7 +166,7 @@ export const earlierCareer = {
 
 export const education: Education[] = [
   {
-    institution: 'Udacity',
+    institution: 'Udacity Institute of AI & Technology',
     programme: 'MS, Artificial Intelligence',
     start: 'Jan 2026',
     end: 'Jun 2027',
@@ -117,8 +174,8 @@ export const education: Education[] = [
   },
   {
     institution: 'Fundación Universitaria Horizonte',
-    programme: 'Ingeniería de Software',
-    start: 'Feb 2021',
+    programme: 'BSc, Computer Software Engineering',
+    start: 'Jan 2020',
     end: 'Nov 2023',
     note: 'acta de grado April 2026',
   },
@@ -144,11 +201,11 @@ export const education: Education[] = [
 
 export const stack: Record<string, string[]> = {
   Languages: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C# (.NET)'],
-  Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Tailwind'],
+  Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Vue', 'Tailwind'],
   Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
-  Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'Cloudflare Workers', 'Auth0', 'JWT'],
-  AI: ['Multi-agent systems', 'LLM orchestration', 'Azure OpenAI', 'Context compaction', 'Token management'],
+  Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'AWS', 'Cloudflare Workers', 'Auth0', 'JWT'],
+  AI: ['Multi-agent systems', 'LLM orchestration', 'Prompt engineering', 'Azure OpenAI', 'Context compaction', 'Token management'],
   Tools: ['Cursor', 'Claude Code', 'BrowserStack', 'Postman'],
 }
 
-export const languages = 'Spanish (native) · English (advanced, B2/C1)'
+export const languages = 'Spanish (native) · English (professional working, B2/C1)'
