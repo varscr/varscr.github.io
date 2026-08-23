@@ -1,84 +1,154 @@
-export const personalInfo = {
-  name: "Fabio Vargas",
-  title: "Full-stack Software Developer",
-  primaryPositioning:
-    "I build reliable, production-ready web applications with a strong focus on clean architecture, scalable APIs, and maintainable front-end systems using modern JavaScript and TypeScript.",
-  expandedPositioning:
-    "I'm a full-stack developer with hands-on experience building and maintaining real production systems. My work spans front-end and back-end development, including authentication flows, REST APIs, database design, and CI/CD workflows. I prioritize clarity, maintainability, and long-term scalability over quick fixes.\n\nI'm especially comfortable working in codebases that require structure, discipline, and collaboration, and I value writing code that other developers can easily understand and extend.",
-  backgroundSummary:
-    "I have professional experience working on production web applications for a U.S.-based fintech company, where I contributed to full-stack features, secure authentication flows, and backend APIs. My background also includes application support and infrastructure exposure, which has shaped a pragmatic, reliability-focused approach to software development.\n\nIn addition to development, I have experience operating and troubleshooting applications in production environments, which helps me design systems with real-world constraints in mind.",
-};
+export type Link = { label: string; href: string; display: string }
 
-export const coreFocusAreas = [
-  "Full-stack web development",
-  "API design and integration",
-  "Authentication and authorization",
-  "Clean code and maintainable architectures",
-  "Production-ready applications",
-  "Developer productivity and tooling",
-];
+export type Role = {
+  org: string
+  title: string
+  location?: string
+  start: string
+  end: string | 'present'
+  summary: string
+  bullets: string[]
+  tags?: string[]
+}
 
-export const experience = {
-  professionalExperience:
-    "I worked as a full-stack developer on production web applications, contributing to both client-facing features and backend systems. My responsibilities included building reusable front-end components, implementing secure authentication and authorization flows, designing and integrating REST APIs, and collaborating on CI/CD workflows to improve deployment reliability.\n\nI also collaborated on projects that incorporated AI tools to enhance internal workflows and product capabilities, focusing on practical, developer-focused use cases rather than experimentation for its own sake.",
-  projectPhilosophy:
-    "I focus on building projects that resemble real production systems rather than isolated demos. I care about structure, clear responsibilities, and predictable behavior. When working on personal or learning projects, I prioritize proper authentication, data modeling, and clean separation of concerns.",
-  approachToLearning:
-    "I continuously refine my skills through hands-on projects and selective coursework, focusing on technologies that have clear production value. I prefer deep understanding of fewer tools over superficial exposure to many frameworks.",
-  valuesAsDeveloper: [
-    "Clarity over cleverness",
-    "Maintainability over shortcuts",
-    "Real-world constraints over theoretical perfection",
-    "Documentation as part of the product",
+export type Education = {
+  institution: string
+  programme: string
+  start: string
+  end: string
+  note?: string
+}
+
+export type Profile = {
+  name: string
+  role: string
+  lead: string
+  email: string
+  links: Link[]
+}
+
+export const profile: Profile = {
+  name: 'Fabio Vargas',
+  role: 'AI & Full-Stack Engineer',
+  lead: 'I work on multi-agent AI systems. At Janover I built features across Burrito — a conversational platform routing 12+ specialised agents on FastAPI and Azure OpenAI.',
+  email: 'fhvargas.work@gmail.com',
+  links: [
+    { label: 'GitHub', href: 'https://github.com/varscr', display: 'github.com/varscr' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/fabio-vargas', display: 'linkedin.com/in/fabio-vargas' },
   ],
-};
+}
 
-export const skills = {
-  frontend: ["Next.js", "Nuxt", "Tailwind CSS", "TypeScript"],
-  backend: ["Node.js", "NestJS", "REST APIs", "JWT"],
-  data: ["MongoDB", "MySQL"],
-  infrastructure: ["GitHub Actions", "CI/CD pipelines", "Linux environments"],
-  other: ["AI-assisted development tools", "Security-aware development practices"],
-};
-
-export type Project = {
-  name: string;
-  description: string;
-  techStack: string[];
-  githubUrl: string;
-};
-
-export const projects: Project[] = [
+export const roles: Role[] = [
   {
-    name: "NestJS User Management API",
-    description:
-      "Backend-driven application demonstrating authentication flows, role-based authorization, and CRUD operations. Focuses on architectural patterns, clean separation of concerns, and maintainable API structure.",
-    techStack: ["NestJS", "TypeScript", "MongoDB", "JWT", "REST API"],
-    githubUrl: "https://github.com/VarScr",
+    org: 'Independent Contractor',
+    title: 'Software Engineer',
+    location: 'Remote',
+    start: 'Jan 2026',
+    end: 'present',
+    summary:
+      'Building Manasara, a luxury real estate platform for a client in Indonesia, on Cloudflare Workers.',
+    bullets: [
+      'Built and shipped Manasara, a luxury real estate site for a client in Indonesia, running on Cloudflare Workers.',
+      'Verified responsive layouts across browsers and iOS devices with BrowserStack.',
+    ],
+    tags: ['Cloudflare Workers', 'TypeScript'],
   },
   {
-    name: "Full-Stack Task Manager",
-    description:
-      "Production-like application with secure authentication, database integration, and CI/CD workflows. Emphasizes real-world constraints including proper error handling, validation, and deployment considerations.",
-    techStack: ["Next.js", "Node.js", "MySQL", "Tailwind CSS", "GitHub Actions"],
-    githubUrl: "https://github.com/VarScr",
+    org: 'Janover',
+    title: 'Full-Stack Software Developer',
+    location: 'Florida, United States',
+    start: 'Jun 2025',
+    end: 'Jan 2026',
+    summary:
+      'Built features across Burrito, a multi-agent conversational AI platform routing 12+ specialised agents, and the core fintech product.',
+    bullets: [
+      'Developed features for Burrito, a multi-agent conversational AI platform on FastAPI and Azure OpenAI serving 12+ specialised chatbots with dynamic routing and fallback.',
+      'Worked on the AgentFactory pattern for dynamic agent instantiation.',
+      'Implemented MongoDB distributed locking to keep concurrent AI sessions from corrupting shared state.',
+      'Contributed context compaction to hold long multi-turn conversations inside model token limits.',
+      'Developed features in the core fintech platform — Nuxt, Nitro, TypeScript and MongoDB — with Auth0 and JWT authentication and GitHub Actions CI/CD.',
+    ],
+    tags: ['FastAPI', 'Azure OpenAI', 'Nuxt', 'MongoDB'],
   },
   {
-    name: "API Integration Platform",
-    description:
-      "Demonstrates API design principles, request/response handling, and integration patterns. Built with scalability and maintainability as primary concerns, including comprehensive documentation.",
-    techStack: ["Node.js", "Express", "TypeScript", "REST API", "MongoDB"],
-    githubUrl: "https://github.com/VarScr",
+    org: 'Teleperformance',
+    title: 'Application Support Engineer',
+    location: 'Bogotá, Colombia',
+    start: 'Jun 2024',
+    end: 'Jun 2025',
+    summary: 'Ran production Linux and IIS servers behind critical database systems.',
+    bullets: [
+      'Managed production Linux and IIS servers for critical database systems, owning stability and performance.',
+      'Diagnosed application crashes from logs alongside clients and development teams.',
+      'Automated repetitive operational tasks with scripting.',
+      'Wrote internal documentation centralising recurring issues for the team.',
+    ],
+    tags: ['Linux', 'IIS', 'SQL Server'],
   },
-];
+  {
+    org: 'PBS Group',
+    title: 'Bilingual Application Analyst',
+    location: 'Bogotá, Colombia',
+    start: 'Jan 2024',
+    end: 'May 2024',
+    summary:
+      'Databases, IIS and Tomcat servers, and Avaya IVR deployments for internal applications.',
+    bullets: [
+      'Administered databases, maintaining their integrity and availability.',
+      'Maintained IIS servers and deployed applications to Tomcat, including Avaya IVRs.',
+      'Troubleshot internal applications to improve stability and performance.',
+    ],
+    tags: ['IIS', 'Tomcat', 'Avaya'],
+  },
+]
 
-export const contact = {
-  availabilityStatement:
-    "Open to opportunities where I can contribute to building and maintaining high-quality web applications as part of a collaborative engineering team.",
-  links: {
-    github: "https://github.com/VarScr",
-    linkedin: "https://www.linkedin.com/in/fabio-vargas-b895551a4/",
-    portfolio: "https://varscr.github.io",
-    cv: "/cv.pdf",
+export const earlierCareer = {
+  label: 'Earlier — graphic design & multimedia',
+  items: ['Cámara de Comercio de Bogotá (2020)', 'ACIEM (2021)'],
+}
+
+export const education: Education[] = [
+  {
+    institution: 'Udacity',
+    programme: 'MS, Artificial Intelligence',
+    start: 'Jan 2026',
+    end: 'Jun 2027',
+    note: 'expected',
   },
-};
+  {
+    institution: 'Fundación Universitaria Horizonte',
+    programme: 'Ingeniería de Software',
+    start: 'Feb 2021',
+    end: 'Nov 2023',
+    note: 'acta de grado April 2026',
+  },
+  {
+    institution: 'Fundación Universitaria Horizonte',
+    programme: 'Diplomado en Ciberseguridad',
+    start: 'Jun 2023',
+    end: 'Aug 2023',
+  },
+  {
+    institution: 'SENA',
+    programme: 'Tecnólogo en Producción Multimedia',
+    start: 'Feb 2019',
+    end: 'Aug 2020',
+  },
+  {
+    institution: 'SENA',
+    programme: 'Técnico en Programación de Software',
+    start: 'Feb 2016',
+    end: 'Nov 2018',
+  },
+]
+
+export const stack: Record<string, string[]> = {
+  Languages: ['TypeScript', 'JavaScript', 'Python', 'Java', 'C# (.NET)'],
+  Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Tailwind'],
+  Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
+  Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'Cloudflare Workers', 'Auth0', 'JWT'],
+  AI: ['Multi-agent systems', 'LLM orchestration', 'Azure OpenAI', 'Context compaction', 'Token management'],
+  Tools: ['Cursor', 'Claude Code', 'BrowserStack', 'Postman'],
+}
+
+export const languages = 'Spanish (native) · English (advanced, B2/C1)'
