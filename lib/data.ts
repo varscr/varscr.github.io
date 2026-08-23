@@ -110,7 +110,7 @@ export const references: Reference[] = [
 
 /** The CV's ABOUT block — longer and more formal than the portfolio's lead. */
 export const about =
-  'AI-focused Full-Stack Engineer with production experience building multi-agent conversational AI platforms and scalable web applications. Contributed to an enterprise AI system serving 12+ specialized chatbots powered by Azure OpenAI, working on agent orchestration, distributed locking, and context compaction for long-running LLM sessions. Currently an AI Developer at NeuralSeek and TechD, and pursuing a Master’s in Artificial Intelligence.'
+  'AI-focused Full-Stack Engineer with production experience on multi-agent conversational AI platforms and scalable web applications. Contributed to an enterprise AI system serving 12+ specialized chatbots, working on dynamic agent instantiation, distributed locking and context compaction for long-running LLM sessions. Currently an AI Developer at NeuralSeek and TechD, and pursuing a Master’s in Artificial Intelligence.'
 
 export const roles: Role[] = [
   {
@@ -158,15 +158,13 @@ export const roles: Role[] = [
     start: 'Jun 2025',
     end: 'Jan 2026',
     summary:
-      'Built features across Burrito, a multi-agent conversational AI platform routing 12+ specialised agents, and the core fintech product.',
+      'Contributed to Burrito, a multi-agent conversational AI platform routing 12+ specialised agents, and built features across the core fintech product.',
     bullets: [
-      'Developed features for Burrito, a multi-agent conversational AI platform on FastAPI and Azure OpenAI serving 12+ specialised chatbots with dynamic routing and fallback.',
-      'Worked on the AgentFactory pattern for dynamic agent instantiation.',
-      'Implemented MongoDB distributed locking to keep concurrent AI sessions from corrupting shared state.',
-      'Contributed context compaction to hold long multi-turn conversations inside model token limits.',
-      'Developed features in the core fintech platform — Nuxt, Nitro, TypeScript and MongoDB — with Auth0 and JWT authentication and GitHub Actions CI/CD.',
+      'Contributed to Burrito, an internal multi-agent conversational AI platform on FastAPI serving 12+ specialised chatbots with dynamic routing and fallback.',
+      'Worked on the AgentFactory pattern for dynamic agent instantiation, on distributed locking for concurrent AI sessions, and on context compaction for token limits across long multi-turn conversations.',
+      'Built front-end and back-end features across the core fintech platform — Nuxt, Nitro, TypeScript and MongoDB — including Auth0 and JWT authentication flows and GitHub Actions CI/CD.',
     ],
-    tags: ['FastAPI', 'Azure OpenAI', 'Nuxt', 'MongoDB'],
+    tags: ['FastAPI', 'Nuxt', 'MongoDB'],
   },
   {
     org: 'Teleperformance',
@@ -184,17 +182,17 @@ export const roles: Role[] = [
     tags: ['Linux', 'IIS', 'SQL Server'],
   },
   {
-    org: 'PBS Group',
+    org: 'Teleperformance',
     title: 'Bilingual Application Analyst',
-    location: 'Bogotá, Colombia',
+    location: 'Bogotá, Colombia · via Infotrans',
     start: 'Jan 2024',
     end: 'May 2024',
     summary:
-      'Databases, IIS and Tomcat servers, and Avaya IVR deployments for internal applications.',
+      'Databases, IIS and Tomcat servers, and Avaya IVR deployments — placed at Teleperformance by the staffing agency Infotrans, then hired directly three weeks later.',
     bullets: [
+      'Supported, troubleshot and validated errors in the client’s internal applications as a bilingual analyst.',
       'Administered databases, maintaining their integrity and availability.',
       'Maintained IIS servers and deployed applications to Tomcat, including Avaya IVRs.',
-      'Troubleshot internal applications to improve stability and performance.',
     ],
     tags: ['IIS', 'Tomcat', 'Avaya'],
   },
@@ -238,7 +236,7 @@ export const stack: Record<string, string[]> = {
   Frameworks: ['FastAPI', 'Nuxt', 'Next', 'NestJS', 'Node', 'Vue', 'Tailwind'],
   Data: ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL Server', 'Drizzle', 'Prisma'],
   Infrastructure: ['Docker', 'Linux', 'Git', 'GitHub Actions', 'AWS', 'Cloudflare Workers', 'Auth0', 'JWT'],
-  AI: ['Multi-agent systems', 'LLM orchestration', 'Prompt engineering', 'Azure OpenAI', 'Context compaction', 'Token management'],
+  AI: ['Multi-agent systems', 'LLM orchestration', 'Prompt engineering', 'RAG', 'Context compaction', 'Token management'],
   Tools: ['Cursor', 'Claude Code', 'BrowserStack', 'Postman'],
 }
 

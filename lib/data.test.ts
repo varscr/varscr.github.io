@@ -49,7 +49,19 @@ describe('roles', () => {
 })
 
 describe('excluded history', () => {
-  const EXCLUDED = ['San Luis', 'Fátima', 'Fatima', 'Robin', 'Foundever', 'Monitor and Instructor', 'robotics']
+  const EXCLUDED = [
+    'San Luis',
+    'Fátima',
+    'Fatima',
+    'Robin',
+    'Foundever',
+    'Monitor and Instructor',
+    'robotics',
+    // PBS Group is a real employer, but no certificación laboral exists and every
+    // date on its paperwork is a form-template revision date. Career/Employers/
+    // PBS-Group.md says: no PBS dates on a CV until that document arrives.
+    'PBS',
+  ]
 
   it('appears nowhere in the data', () => {
     const serialised = JSON.stringify({ profile, roles, projects, earlierCareer, education, stack })
@@ -104,5 +116,23 @@ describe('projects', () => {
       expect(project.stack.length, `${project.name} stack`).toBeGreaterThan(0)
       expect(project.bullets.length, `${project.name} bullets`).toBeGreaterThan(0)
     }
+  })
+})
+
+describe('honesty guardrails', () => {
+  // Career/AI-fullstack-transition.md in the personal vault is the source of truth:
+  // Fabio contributed to Burrito as a team member. He did not architect its agentic
+  // layer and did not implement its Azure OpenAI integration, and he has only light
+  // Azure exposure — so "Azure OpenAI" must never appear as one of his skills.
+  it('never claims Azure OpenAI as a personal skill', () => {
+    expect(JSON.stringify(stack)).not.toContain('Azure')
+    expect(profile.lead).not.toContain('Azure')
+  })
+
+  it('says contributed to Burrito, never built or created it', () => {
+    const janover = roles.find((role) => role.org === 'Janover')
+    const text = JSON.stringify(janover) + profile.lead
+    expect(text).toMatch(/Contributed to Burrito|contributed to Burrito/)
+    expect(text).not.toMatch(/[Bb]uilt Burrito|[Cc]reated Burrito|[Aa]rchitected/)
   })
 })
