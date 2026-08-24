@@ -1,125 +1,42 @@
-# Fabio Vargas - Portfolio
+# varscr.github.io
 
-A minimal, production-ready portfolio built with Next.js, TypeScript, and Tailwind CSS.
+Personal site of **Fabio Vargas** — AI & Full-Stack Engineer.
+Live at **[varscr.github.io](https://varscr.github.io)**.
 
-## Features
+Typographic and text-only: ink on paper, one accent, no animation library. It loads instantly
+and prints cleanly.
 
-- **Dark theme** with modern, minimal design
-- **Single-page design** with smooth scrolling between sections
-- **Dynamic animations** powered by Framer Motion (parallax, stagger, hover effects)
-- **Glassmorphism effects** on interactive elements
-- **Gradient dividers** between sections
-- **Responsive design** optimized for all devices
-- **Static export** ready for GitHub Pages deployment
-- **SEO optimized** with proper metadata and Open Graph tags
+## Stack
 
-## Tech Stack
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · statically exported to
+GitHub Pages. No runtime dependencies beyond React and Next — no animation library, no analytics,
+and fonts are inlined at build time rather than fetched.
 
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Deployment:** GitHub Pages (static export)
+Scroll reveals and the gradient at the foot of the page are CSS scroll-driven animations, wrapped
+in `@supports` so a browser without scroll timelines renders the page fully visible.
 
-## Development
+## Content
 
-Install dependencies:
+Every career fact lives in one typed file, `lib/data.ts`. No component contains career text, so a
+role is edited once. `lib/data.test.ts` guards it — roles stay in order, no employment gap opens
+up, and nothing deliberately excluded can creep back in.
+
+## Commands
 
 ```bash
-npm install
+npm run dev       # dev server
+npm test          # data integrity tests
+npm run verify    # tests + build + assert what must and must not be in the output
+npm run serve     # serve out/ the way GitHub Pages resolves URLs
+npm run deploy    # build and publish to the gh-pages branch
 ```
 
-Run the development server:
+`public/.nojekyll` must stay — without it GitHub Pages ignores `_next/`, which holds all the
+JavaScript and CSS.
 
-```bash
-npm run dev
-```
+## Docs
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-## Building for Production
-
-Build the static export:
-
-```bash
-npm run build
-```
-
-This creates an `out` directory with the static files ready for deployment.
-
-## Deployment to GitHub Pages
-
-### First-time setup
-
-1. Go to your repository settings → Pages
-2. Set source to `gh-pages` branch (root folder)
-3. Save
-
-### Deploy updates
-
-Simply run:
-
-```bash
-npm run deploy
-```
-
-This command will:
-- Build the production bundle (`npm run build`)
-- Deploy the `out/` folder to the `gh-pages` branch (including the `.nojekyll` file)
-
-After 2-3 minutes, your site will be live at `https://varscr.github.io`
-
-### Manual deployment (alternative)
-
-If you prefer to deploy manually:
-
-```bash
-npm run build
-npx gh-pages -d out -b gh-pages --dotfiles
-```
-
-**Important:** The `--dotfiles` flag ensures the `.nojekyll` file is deployed. This file tells GitHub Pages not to use Jekyll, which would otherwise ignore the `_next/` folder containing all JavaScript and CSS files.
-
-## Project Structure
-
-```
-├── app/
-│   ├── layout.tsx          # Root layout with metadata
-│   ├── page.tsx            # Main page composing all sections
-│   └── globals.css         # Global styles
-├── components/
-│   ├── sections/           # Section components
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Experience.tsx
-│   │   ├── Skills.tsx
-│   │   ├── Projects.tsx
-│   │   └── Contact.tsx
-│   └── ui/                 # Reusable UI components
-│       ├── Section.tsx
-│       └── Card.tsx
-├── lib/
-│   └── data.ts             # Centralized content data
-└── public/
-    ├── .nojekyll           # Tells GitHub Pages to skip Jekyll processing
-    └── ...                 # Other static assets
-```
-
-## Updating Content
-
-All portfolio content is centralized in `lib/data.ts`. Edit this file to update:
-
-- Personal information
-- Professional experience
-- Skills and technologies
-- Featured projects
-- Contact information
-
-After updating, redeploy with:
-
-```bash
-npm run deploy
-```
+See [`docs/`](docs/) — architecture, the content model, and operations.
 
 ## License
 

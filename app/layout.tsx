@@ -1,35 +1,33 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: "Fabio Vargas - Full-stack Software Developer",
-  description: "I build reliable, production-ready web applications with a strong focus on clean architecture, scalable APIs, and maintainable front-end systems using modern JavaScript and TypeScript.",
+  metadataBase: new URL('https://varscr.github.io'),
+  title: 'Fabio Vargas — AI & Full-Stack Engineer',
+  description:
+    'AI and full-stack engineer. Multi-agent conversational platforms on FastAPI, production TypeScript, and Linux operations.',
   openGraph: {
-    title: "Fabio Vargas - Full-stack Software Developer",
-    description: "I build reliable, production-ready web applications with a strong focus on clean architecture, scalable APIs, and maintainable front-end systems.",
-    url: "https://varscr.github.io",
-    siteName: "Fabio Vargas Portfolio",
-    locale: "en_US",
-    type: "website",
+    title: 'Fabio Vargas — AI & Full-Stack Engineer',
+    description:
+      'AI and full-stack engineer. Multi-agent conversational platforms on FastAPI, production TypeScript, and Linux operations.',
+    url: 'https://varscr.github.io',
+    siteName: 'Fabio Vargas',
+    locale: 'en_US',
+    type: 'website',
   },
-};
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
-      </body>
+    <html lang="en">
+      <body className={`${inter.variable} font-sans antialiased`}>{children}</body>
     </html>
-  );
+  )
 }
