@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "next build && node scripts/prepare-deploy.mjs && node scripts/check-build.mjs --deploy && npx gh-pages -d out -b gh-pages",
+    "deploy": "next build && node scripts/prepare-deploy.mjs && node scripts/check-build.mjs --deploy && npx gh-pages -d out -b gh-pages && next build && echo \"local out/ restored with the CV\"",
     "test": "vitest run",
     "verify": "npm run test && npm run build && node scripts/check-build.mjs",
     "serve": "node scripts/serve-out.mjs",
