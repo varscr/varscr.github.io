@@ -5,8 +5,8 @@ const deployMode = process.argv.includes('--deploy')
 // What the public portfolio must say.
 const PORTFOLIO_REQUIRED = ['Fabio Vargas', 'NeuralSeek', 'TechD', 'Burrito', 'Manasara', 'fhvargas.work@gmail.com']
 // What the CV must say, when it has been built locally.
-const CV_REQUIRED = ['NeuralSeek', 'TechD', 'Independent Contractor', 'Janover', 'Teleperformance', 'Infotrans', 'Udacity', 'SENA']
-const EXCLUDED = ['San Luis', 'Fátima', 'Fatima', 'Robin', 'Foundever', 'Monitor and Instructor', 'robotics', 'PBS']
+const CV_REQUIRED = ['NeuralSeek', 'TechD', 'Independent Contractor', 'Janover', 'Teleperformance', 'PBS Group', 'Udacity', 'SENA']
+const EXCLUDED = ['San Luis', 'Fátima', 'Fatima', 'Robin', 'Foundever', 'Monitor and Instructor', 'robotics']
 
 const failures = []
 

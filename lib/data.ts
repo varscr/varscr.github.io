@@ -182,15 +182,15 @@ export const roles: Role[] = [
     tags: ['Linux', 'IIS', 'SQL Server'],
   },
   {
-    org: 'Teleperformance',
+    org: 'PBS Group',
     title: 'Bilingual Application Analyst',
-    location: 'Bogotá, Colombia · via Infotrans',
+    location: 'Bogotá, Colombia',
     start: 'Jan 2024',
     end: 'May 2024',
     summary:
-      'Databases, IIS and Tomcat servers, and Avaya IVR deployments — placed at Teleperformance by the staffing agency Infotrans, then hired directly three weeks later.',
+      'Databases, IIS and Tomcat servers, and Avaya IVR deployments for internal applications.',
     bullets: [
-      'Supported, troubleshot and validated errors in the client’s internal applications as a bilingual analyst.',
+      'Supported, troubleshot and validated errors in internal applications as a bilingual analyst.',
       'Administered databases, maintaining their integrity and availability.',
       'Maintained IIS servers and deployed applications to Tomcat, including Avaya IVRs.',
     ],

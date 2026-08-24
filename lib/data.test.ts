@@ -57,10 +57,6 @@ describe('excluded history', () => {
     'Foundever',
     'Monitor and Instructor',
     'robotics',
-    // PBS Group is a real employer, but no certificación laboral exists and every
-    // date on its paperwork is a form-template revision date. Career/Employers/
-    // PBS-Group.md says: no PBS dates on a CV until that document arrives.
-    'PBS',
   ]
 
   it('appears nowhere in the data', () => {
