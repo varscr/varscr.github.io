@@ -120,7 +120,7 @@ describe('projects', () => {
 })
 
 describe('honesty guardrails', () => {
-  // Career/AI-fullstack-transition.md in the personal vault is the source of truth:
+  // Career/Positioning.md in the personal vault is the source of truth:
   // Fabio contributed to Burrito as a team member. He did not architect its agentic
   // layer and did not implement its Azure OpenAI integration, and he has only light
   // Azure exposure — so "Azure OpenAI" must never appear as one of his skills.

@@ -252,7 +252,6 @@ Nothing is pushed to GitHub Pages until Fabio has seen the PDF.
 
 ## Out of scope for this spec
 
-The Obsidian vault. The `obsidian` session owns `Career/` and is restructuring
-it with Fabio. Per the repo/vault split in CLAUDE.md, the vault gets a
-`Projects/` note pointing at this repo — but that is coordinated through Fabio,
-not written from this session.
+*Superseded August 23 2026.* `Career/` was restructured from this session, with
+the obsidian session's agreement — see `personal-obsidian-vault/Career/` and its
+`Portfolio-and-CV.md`, which is now the source of truth for what this site says.
